@@ -9,107 +9,10 @@
 </head>
 
 <body>
-    <div class="div">
-        <p id="0"></p>
-        <p id="1"></p>
-        <p id="2"></p>
-        <p id="3"></p>
-    </div>
+
 </body>
 <script>
-    let board = [
-        [2, 2, 4, 4],
-        [0, 2, 0, 4],
-        [0, 0, 0, 4],
-        [2, 0, 0, 4],
-    ]
-    let div1 = document.getElementById("0")
-    let div2 = document.getElementById("1")
-    let div3 = document.getElementById("2")
-    let div4 = document.getElementById("3")
-    const update = () => {
-        div1.innerText = JSON.stringify(board[0])
-        div2.innerText = JSON.stringify(board[1])
-        div3.innerText = JSON.stringify(board[2])
-        div4.innerText = JSON.stringify(board[3])
-    }
-    const moveRight = () => {
-        for (let j = 0; j < 4; j++) {
-            for (let r = 0; r < 4; r++) {
-                for (let i = 0; i < 3; i++) {
-                    if (board[j][i + 1] === 0) {
-                        board[j][i + 1] = board[j][i]
-                        board[j][i] = 0;
-                    }
-                    if (board[j][i + 1] === board[j][i]) {
-                        board[j][i + 1] += board[j][i]
-                        board[j][i] = 0;
-                    }
-                }
-            }
-        }
-    update()
 
-    }
-    const moveLeft = () => {
-        for (let j = 0; j < 4; j++) {
-            for (let r = 0; r < 4; r++) {
-                for (let i = 3; i > 0; i--) {
-                    if (board[j][i - 1] === 0) {
-                        board[j][i - 1] = board[j][i]
-                        board[j][i] = 0;
-                    }
-                    if (board[j][i - 1] === board[j][i]) {
-                        board[j][i - 1] += board[j][i]
-                        board[j][i] = 0;
-                    }
-                }
-            }
-        }
-        update()
-
-    }
-    const moveDown = () => {
-        for (let j = 0; j < 4; j++) {
-            for (let r = 0; r < 4; r++) {
-                for (let i = 0; i < 3; i++) {
-                    if (board[i + 1][r] === 0) {
-                        board[i + 1][r] = board[i][r]
-                        board[i][r] = 0;
-                    }
-                    if (board[i + 1][r] === board[i][r]) {
-                        board[i + 1][r] += board[i][r]
-                        board[i][r] = 0;
-                    }
-                }
-            }
-        }
-        update()
-
-    }
-    const moveUp = () => {
-        for (let j = 0; j < 4; j++) {
-            for (let r = 0; r < 4; r++) {
-                for (let i = 3; i > 0; i--) {
-                    if (board[i - 1][r] === 0) {
-                        board[i - 1][r] = board[i][r]
-                        board[i][r] = 0;
-                    }
-                    if (board[i - 1][r] === board[i][r]) {
-                        board[i - 1][r] += board[i][r]
-                        board[i][r] = 0;
-                    }
-                }
-            }
-        }
-        update()
-
-    }
-    update()
-
- document.getElementsByTagName("body")[0].addEventListener("keypress", e => {
-     
- })
 </script>
 
 </html>
