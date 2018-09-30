@@ -1,3 +1,3 @@
-# eloquent-javascript
+# javascript
 
 ## javascript training
