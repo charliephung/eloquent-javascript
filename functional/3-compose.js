@@ -5,16 +5,14 @@ const compose = (...fns) => pipe(...fns.reverse());
 
 const pipe = (...fns) => {
   const [fn1, fn2, ...rest] = fns;
-  if (typeof fn1 === "function") {
-    if (typeof fn2 === "function") {
-      return pipe(
-        x => fn2(fn1(x)),
-        ...rest
-      );
-    } else {
-      return x => fn1(x);
-    }
-  }
+  return typeof fn1 === "function"
+    ? typeof fn2 === "function"
+      ? pipe(
+          x => fn2(fn1(x)),
+          ...rest
+        )
+      : x => fn1(x)
+    : x => fn1(x);
 };
 
 console.log(
