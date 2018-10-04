@@ -1,10 +1,4 @@
 //  ????????????????
-const sumTrampolined = trampoline(function f(sum, num, ...nums) {
-  sum += num;
-  if (nums.length == 0) return sum;
-  return () => f(sum, nums);
-});
-
 const trampoline = fn => {
   return (...args) => {
     let res = fn(...args);
@@ -16,3 +10,11 @@ const trampoline = fn => {
     return res;
   };
 };
+
+const sumTrampolined = trampoline(function f(sum, num, ...nums) {
+  sum += num;
+  if (nums.length == 0) return sum;
+  return () => f(sum, nums);
+});
+
+sumTrampolined(1, 2, 3, 4, 5);
