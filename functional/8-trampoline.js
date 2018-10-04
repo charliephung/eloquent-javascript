@@ -1,8 +1,6 @@
-//  ????????????????
 const trampoline = fn => {
   return (...args) => {
     let res = fn(...args);
-    console.log(res);
 
     while (typeof res == "function") {
       res = res();
