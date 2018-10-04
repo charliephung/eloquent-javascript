@@ -95,9 +95,9 @@ const pipe = (fn1, fn2) => (...args) => fn2(fn1(...args));
 const mapReducer = curry((fn, op) => (obj, i) => op(obj, fn(i)));
 const filterReducer = curry((fn, op) => (obj, i) => (fn(i) ? op(obj, i) : obj));
 
-const tranducer = pipe(
+const transducer = pipe(
   mapReducer(add1),
   filterReducer(isOdd)
 );
 
-list.reduce(tranducer(sum), 0);
+list.reduce(transducer(sum), 0);
