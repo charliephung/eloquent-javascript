@@ -49,33 +49,26 @@ const filterReducer = (fn, listOperator) => (list, item) =>
  */
 // curry and pipe
 const curry = fn => fn1 => fn2 => fn(fn1, fn2);
-const pipe = (fn1, fn2) => (...args) => fn2(fn1(...args));
+const pipeTwo = (fn1, fn2) => (...args) => fn2(fn1(...args));
 const curriedMapReducer = curry(mapReducer);
 const curriedFilterReducer = curry(filterReducer);
 // since now curriedMapReducer(add1) and curriedFilterReducer(isOdd) both expect same input
 list
   .reduce(
-    pipe(
-      curriedFilterReducer(add1),
-      curriedFilterReducer(isOdd)
-    )(listOperator),
+    pipeTwo(curriedFilterReducer(add1), curriedFilterReducer(isOdd))(
+      listOperator
+    ),
     []
   )
   .reduce(sum);
 // Since the final output is a sum of all list
 // => change init value and operator
 list.reduce(
-  pipe(
-    curriedFilterReducer(add1),
-    curriedFilterReducer(isOdd)
-  )(sum),
+  pipeTwo(curriedFilterReducer(add1), curriedFilterReducer(isOdd))(sum),
   0
 );
 list.reduce(
-  pipe(
-    curry(mapReducer)(add1),
-    curry(filterReducer)(isOdd)
-  )(sum),
+  pipeTwo(curry(mapReducer)(add1), curry(filterReducer)(isOdd))(sum),
   0
 );
 
@@ -90,12 +83,14 @@ const sum = (x, y) => x + y;
 let list = [2, 5, 8, 11, 14, 17, 20];
 
 const curry = fn => fn1 => fn2 => fn(fn1, fn2);
-const pipe = (fn1, fn2) => (...args) => fn2(fn1(...args));
+const pipe = (...fns) =>
+  fns.reduce((fn1, fn2) => (...args) => fn2(fn1(...args)));
 
 const mapReducer = curry((fn, op) => (obj, i) => op(obj, fn(i)));
 const filterReducer = curry((fn, op) => (obj, i) => (fn(i) ? op(obj, i) : obj));
 
 const transducer = pipe(
+  mapReducer(add1),
   mapReducer(add1),
   filterReducer(isOdd)
 );
