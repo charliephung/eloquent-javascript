@@ -2,6 +2,7 @@
 const trampoline = fn => {
   return (...args) => {
     let res = fn(...args);
+    console.log(res);
 
     while (typeof res == "function") {
       res = res();
@@ -14,7 +15,7 @@ const trampoline = fn => {
 const sumTrampolined = trampoline(function f(sum, num, ...nums) {
   sum += num;
   if (nums.length == 0) return sum;
-  return () => f(sum, nums);
+  return () => f(sum, ...nums);
 });
 
-sumTrampolined(1, 2, 3, 4, 5);
+console.log(sumTrampolined(1, 2, 3));
