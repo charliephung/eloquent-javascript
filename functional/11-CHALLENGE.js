@@ -2,10 +2,10 @@
 // UTILITIES
 // ************************************
 const curry = (fn, p = fn.length) =>
-  (curried = prevArg => nextArg => {
+  (curried = (prevArg = []) => nextArg => {
     let args = prevArg.concat(nextArg);
     return args.length >= p ? fn(...args) : curried(args);
-  })([]);
+  })();
 const compose = (...fns) => pipe(...fns.reverse());
 const pipe = (...fns) =>
   fns.reduce((fn1, fn2) => (...args) => fn2(fn1(...args)));
