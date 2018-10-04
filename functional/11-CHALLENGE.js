@@ -4,11 +4,7 @@
 const curry = (fn, p = fn.length) =>
   (curried = prevArg => nextArg => {
     let args = prevArg.concat(nextArg);
-    if (args.length >= p) {
-      return fn(...args);
-    } else {
-      return curried(args);
-    }
+    return args.length >= p ? fn(...args) : curried(args);
   })([]);
 const compose = (...fns) => pipe(...fns.reverse());
 const pipe = (...fns) =>
