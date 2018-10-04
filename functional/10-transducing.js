@@ -80,7 +80,7 @@ const add1 = x => x + 1;
 const isOdd = x => x % 2 != 0;
 const sum = (x, y) => x + y;
 
-let list = [2, 5, 8, 11, 14, 17, 20];
+let list = [1, 2, 3, 5, 6, 7];
 
 const curry = fn => fn1 => fn2 => fn(fn1, fn2);
 const pipe = (...fns) =>
@@ -96,3 +96,19 @@ const transducer = pipe(
 );
 
 list.reduce(transducer(sum), 0);
+
+// tranduce function
+const transduce = (transducers, operator, init, obj) =>
+  obj.reduce(transducers(operator), init);
+const pipe = (...fns) =>
+  fns.reduce((fn1, fn2) => (...args) => fn2(fn1(...args)));
+
+transduce(
+  pipe(
+    mapReducer(add1),
+    filterReducer(isOdd)
+  ),
+  sum,
+  0,
+  list
+);
