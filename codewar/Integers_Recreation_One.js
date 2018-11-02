@@ -5,24 +5,13 @@ function listSquared(m, n) {
       if(isSquare(divSum)) {
         arr.push([i, divSum]);
       }
-      return arr;
-      
+      return arr;  
     },[])
-    
-    
 }
 
-function isSquare(n) {
-  return n > 0 && Math.sqrt(n) % 1 === 0;
-};
-function sum(n, m) {
-  return n + m;
-}
-    
-function sqrt (n) {
-  return n * n;
-}
-
+function isSquare(n) { return n > 0 && Math.sqrt(n) % 1 === 0; };
+function sum(n, m) { return n + m; }
+function sqrt (n) { return n * n; }
 function findDivisors(n) {
   var divisors = [];
   var index = 1;
