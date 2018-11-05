@@ -38,7 +38,7 @@ var recoverSecret = function(triplets) {
 }
 
 
-// COOL SOLUTION
+// COOL SOLUTION BY SOMEONE
 var recoverSecret = function(triplets) {
   for(var [first] of triplets)
   {
