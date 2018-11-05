@@ -36,3 +36,20 @@ var recoverSecret = function(triplets) {
     return firstChars.find(e => secondChars.indexOf(e) == -1);
   }
 }
+
+
+// COOL SOLUTION
+var recoverSecret = function(triplets) {
+  for(var [first] of triplets)
+  {
+    console.log("##################\n",triplets);
+    console.log("########--FIRST--######\n",first);
+    console.log("########--TRUE--######\n",triplets.every(tuple => tuple.indexOf(first) <= 0));
+    if (triplets.every(tuple => tuple.indexOf(first) <= 0))
+    {
+      triplets.filter(([item]) => item == first).forEach(tuple => tuple.shift());
+      return first + recoverSecret(triplets.filter(tuple => tuple.length > 0));
+    }
+  }
+  return '';
+}
