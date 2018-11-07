@@ -1,4 +1,5 @@
 function validateBattlefield(field) {
+// TODO:  Check for amount of ships
   var shipPosition = field
   .reduce(
     (position, el, i) => 
