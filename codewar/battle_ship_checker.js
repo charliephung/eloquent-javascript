@@ -21,7 +21,7 @@ function validateBattlefield(field) {
       if(direction.length > 4) return false;
    
       var dir = {up: 0, right: 0, down: 0, left: 0}
-      
+      //TODO fix bug check 2d arr
       if(field[x,y + 1] == 1) dir.right = 1; 
       if(field[x,y - 1] == 1) dir.left = 1; 
       if(field[x + 1, y] == 1) dir.up = 1; 
