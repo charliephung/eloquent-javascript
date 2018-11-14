@@ -95,3 +95,26 @@ function PriorityQueue() {
     return q.shift();
   };
 }
+
+// SOLUTION :( NOT MINE
+function pathFinder(maze){
+  maze = maze.split('\n').map(r => r.split(''));
+  maze[0][0] = 0;
+  let front = [[0, 0]], c, goal = maze.length-1;
+  function tryStep(r, c, v) {
+    let row = maze[r];
+    if (row && row[c] === ".") {
+      row[c] = v;
+      front.push([r, c]);
+    } 
+  }
+  while (c = front.shift()){
+    if (c[0] === goal && c[1] === goal) return true;
+    let step = maze[c[0]][c[1]] + 1;
+    tryStep(c[0]-1, c[1], step);
+    tryStep(c[0], c[1]-1, step);
+    tryStep(c[0], c[1]+1, step);
+    tryStep(c[0]+1, c[1], step);
+  }
+  return false;
+}
