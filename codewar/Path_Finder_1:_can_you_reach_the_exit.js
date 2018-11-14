@@ -13,44 +13,26 @@ function pathFinder(maze) {
   return find(0, 0);
 
   function find(x, y) {
-    var node = [x,y];
+    var currentNode = [x,y];
     var upNode = [x - 1, y];
     var downNode = [x + 1, y];
     var leftNode = [x, y - 1];
     var rightNode = [x, y + 1];
-    
+
     if (x == rows && y == cols) return true;
 
     var tobeExploreNode = ExploreQueue.dequeue();
     
-    if (!ExploreSet.has(node)) ExploreSet.add(node);
-    if (
-      validPosition(...upNode) &&
-      !ExploreSet.has(upNode) &&
-      !ExploreQueue.isInQueue(upNode)
+    if (!ExploreSet.has(currentNode)) ExploreSet.add(currentNode);
+    [currentNode, upNode, downNode, leftNode, rightNode].forEach(node => {
+        if (
+        validPosition(...node) &&
+        !ExploreSet.has(node) &&
+        !ExploreQueue.isInQueue(node)
     ){
-      ExploreQueue.enqueue(upNode, score(...upNode));
+      ExploreQueue.enqueue(node, score(...node));
       }
-    
-    if (
-      validPosition(...downNode) &&
-      !ExploreSet.has(downNode) &&
-      !ExploreQueue.isInQueue(downNode)
-    ){
-      ExploreQueue.enqueue(downNode, score(...downNode));
-      }
-    if (
-      validPosition(...rightNode) &&
-      !ExploreSet.has(rightNode) &&
-      !ExploreQueue.isInQueue(rightNode)
-    )
-      ExploreQueue.enqueue(rightNode, score(...rightNode));
-    if (
-      validPosition(...leftNode) &&
-       !ExploreSet.has(leftNode) &&
-      !ExploreQueue.isInQueue(leftNode)
-    )
-      ExploreQueue.enqueue(leftNode, score(...leftNode));
+    })
       
     
     if (ExploreQueue.getLength() == 0) return false;
