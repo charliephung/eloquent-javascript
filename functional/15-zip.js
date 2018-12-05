@@ -4,8 +4,7 @@ Array.zip = function(...arrs) {
     combinerFunction = arrs.pop(),
     minLength = Math.min(...arrs.map(arr => arr.length));
   for (counter = 0; counter < minLength; counter++) {
-    results.push(combinerFunction(left[counter], right[counter]));
+    results.push(combinerFunction(...arrs.map(arr => arr[counter])));
   }
-
   return results;
 };
