@@ -17,7 +17,7 @@ function fromEvent(dom, eventName) {
 // Example
 var body = document.getElementsByTagName("body")[0];
 
-var click = fromEvent(body, "mousemove");
-click.forEach({
+var mousemove = fromEvent(body, "mousemove");
+mousemove.forEach({
   onNext: e => console.log(e)
 });
