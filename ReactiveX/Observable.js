@@ -10,6 +10,7 @@ Observable.fromEvent = function(dom, eventName) {
     };
   });
 };
+
 Observable.prototype = {
   subscribe(onNext, onError = function() {}, onCompleted = function() {}) {
     if (typeof onNext == "function")
@@ -45,20 +46,20 @@ Observable.prototype = {
   take(num) {
     return new Observable(({ onNext, onError, onCompleted }) => {
       var counter = 0;
-      var takeObserver = {
+      var subscriptionObj = this.subscribe({
         onNext: x => {
           onNext(x);
           counter++;
           if (counter == num) {
-            this.dispose();
-            this.onCompleted();
+            subscriptionObj.dispose();
+            onCompleted();
           }
         },
         onError,
         onCompleted
-      };
+      });
 
-      return this.subscribe(takeObserver);
+      return subscriptionObj;
     });
   }
 };
