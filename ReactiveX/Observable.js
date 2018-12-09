@@ -24,20 +24,41 @@ Observable.prototype = {
   },
   map(applyFn) {
     return new Observable(({ onNext, onError, onCompleted }) => {
-      this.subscribe({
+      var mapObserver = {
         onNext: x => onNext(applyFn(x)),
         onError,
         onCompleted
-      });
+      };
+      return this.subscribe(mapObserver);
     });
   },
   filter(predicateFn) {
     return new Observable(({ onNext, onError, onCompleted }) => {
-      this.subscribe({
+      var filterObserver = {
         onNext: x => predicateFn(x) && onNext(x),
         onError,
         onCompleted
-      });
+      };
+      return this.subscribe(filterObserver);
+    });
+  },
+  take(num) {
+    return new Observable(({ onNext, onError, onCompleted }) => {
+      var counter = 0;
+      var takeObserver = {
+        onNext: x => {
+          onNext(x);
+          counter++;
+          if (counter == num) {
+            this.dispose();
+            this.onCompleted();
+          }
+        },
+        onError,
+        onCompleted
+      };
+
+      return this.subscribe(takeObserver);
     });
   }
 };
