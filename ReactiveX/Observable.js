@@ -2,6 +2,9 @@ class Observable {
   constructor(subscribe) {
     this._subscribe = subscribe;
   }
+  /**
+   * @public
+   */
   subscribe(next, error = () => {}, complete = () => {}) {
     return typeof next == "function"
       ? this._subscribe({
@@ -11,7 +14,20 @@ class Observable {
         })
       : this._subscribe(next);
   }
-
+  map(projection) {
+    return new Observable(({ next, error, onComplete }) => {
+      var mapObserver = {
+        next: x => projection(next(x)),
+        error,
+        onComplete
+      };
+      var subscription = this.subscribe(mapObserver);
+      return subscription;
+    });
+  }
+  /**
+   * @static
+   */
   static timeout(time) {
     return new Observable(({ next, error, onComplete }) => {
       var handler = setTimeout(() => {
