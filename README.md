@@ -5,3 +5,4 @@
 - solved codewar
 - functional programming utils
 - RxJS
+- ramda
