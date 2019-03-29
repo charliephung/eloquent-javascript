@@ -10,3 +10,20 @@ const PrintBookInfo = (item: Book): void => {
 let [book1, book2] = util.GetAllBooks();
 PrintBookInfo(book1);
 PrintBookInfo(book2);
+
+let allBooks: Book[] = util.GetAllBooks();
+let allMagazines: Magazine[] = util.GetAllMagazines();
+
+const PrintTitle = (item: Book | Magazine) => console.log(item.title);
+
+let serialNovel: Book & Magazine = {
+  id: 100,
+  title: "YDKJS",
+  author: "KS",
+  category: Category.Software,
+  available: true,
+  publisher: "KS"
+};
+
+// let frequency: "always" | "never" = "never";
+type Frequency = "always" | "never";
